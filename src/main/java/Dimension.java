@@ -34,6 +34,10 @@ public class Dimension {
     // DECISIÓN DE DISEÑO (ver enunciado): si decides que el volumen lo
     // calcula Dimension, añade aquí el método.
 
+    public double calcularVolumen(){
+        return alto * ancho * largo;
+    }
+
     /**
      * @return las medidas con el formato "40.0 x 30.0 x 50.0 cm"
      */

@@ -27,32 +27,33 @@ public class Paquete {
     }
 
     public Dimension getDimension() {
-        // TODO
-        return null;
+        return dimension;
     }
 
     /**
      * @return el peso real en kg
      */
     public double getPeso() {
-        // TODO
-        return 0;
+        return pesoReal;
     }
 
     /**
      * @return el volumen del paquete en cm3
      */
+
+    // TODO (lee la decisión de diseño del enunciado)
+    // He decidido que el volumen se calcule en Dimension por que el ya
+    // tiene las tres medidas, y de ese modo Paquete solo tiene que hacer una llamada y no tres.
+    // y en el caso que otra clase necesite el volumen, no tendrá que hacer de nuevo la multiplicación.
     public double calcularVolumen() {
-        // TODO (lee la decisión de diseño del enunciado)
-        return 0;
+        return dimension.calcularVolumen();
     }
 
     /**
      * @return el peso volumétrico en kg (volumen / FACTOR_VOLUMETRICO)
      */
     public double calcularPesoVolumetrico() {
-        // TODO
-        return 0;
+        return calcularVolumen() / FACTOR_VOLUMETRICO;
     }
 
     /**
