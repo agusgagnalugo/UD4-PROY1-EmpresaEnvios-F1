@@ -1,20 +1,21 @@
 /**
  * Un bulto físico que forma parte de un envío.
  *
- * @author
+ * @author Agustina Gagna Lugo
  */
 public class Paquete {
-
     /** cm3 que equivalen a 1 kg a efectos de facturación */
     public static final double FACTOR_VOLUMETRICO = 5000;
 
     // TODO atributos: una Dimension y el peso real (kg)
-
+    private Dimension dimension;
+    private double pesoReal;
     /**
      * Crea un paquete a partir de una dimensión ya creada y su peso real (kg).
      */
     public Paquete(Dimension dimension, double peso) {
-        // TODO
+        pesoReal = peso;
+        this.dimension = dimension;
     }
 
     /**
@@ -22,7 +23,7 @@ public class Paquete {
      * Sin duplicar el código del otro constructor.
      */
     public Paquete(double alto, double ancho, double largo, double peso) {
-        // TODO
+        this(new Dimension(alto, ancho, largo), peso);
     }
 
     public Dimension getDimension() {
