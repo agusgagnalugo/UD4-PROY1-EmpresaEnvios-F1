@@ -7,11 +7,14 @@
  * @author
  */
 public class Envio {
-
-    // TODO constante de clase MAX_PAQUETES (ver enunciado)
-
-    // TODO atributos: código de seguimiento, código postal y tres paquetes
-
+    //Elegí private porque es la más restrictiva y solo la usa la clase Envio.
+    // Comprobé que ninguna otra clase la necesita, así que no hace falta hacerla public
+    private static final int MAX_PAQUETES = 3;
+    private String codigo;
+    private String codigoPostal;
+    private Paquete paquete1;
+    private Paquete paquete2;
+    private Paquete paquete3;
     /**
      * Crea un envío sin paquetes.
      *
@@ -19,17 +22,16 @@ public class Envio {
      * @param codigoPostal código postal del destino, p.ej. "36202"
      */
     public Envio(String codigo, String codigoPostal) {
-        // TODO
+        this.codigo = codigo;
+        this.codigoPostal = codigoPostal;
     }
 
     public String getCodigo() {
-        // TODO
-        return null;
+        return codigo;
     }
 
     public String getCodigoPostal() {
-        // TODO
-        return null;
+        return codigoPostal;
     }
 
     /**
@@ -37,16 +39,25 @@ public class Envio {
      * Para mejorar el algoritmo: Los paquetes se añaden siempre en orden, así que nunca hay huecos entre ellos.
      */
     public int getNumeroPaquetes() {
-        // TODO (se calcula comprobando qué atributos d paquete son null)
-        return 0;
+        int contador = 0;
+
+        if(paquete1 != null){
+            contador++;
+        }
+        if(paquete2 != null){
+            contador++;
+        }
+        if(paquete3 != null){
+            contador++;
+        }
+        return contador;
     }
 
     /**
      * @return true si ya no se pueden añadir más paquetes
      */
     public boolean estaCompleto() {
-        // TODO
-        return false;
+        return getNumeroPaquetes() == MAX_PAQUETES;
     }
 
     /**
@@ -55,8 +66,18 @@ public class Envio {
      * @return true si se ha añadido, false si el envío estaba completo
      */
     public boolean addPaquete(Paquete paquete) {
-        // TODO
-        return false;
+        if(estaCompleto()){
+            return false;
+        }
+        if(paquete1 == null){
+            paquete1 = paquete;
+        }
+        else if(paquete2 == null) {
+            paquete2 = paquete;
+        } else {
+            paquete3 = paquete;
+        }
+        return true;
     }
 
     /**
@@ -65,16 +86,25 @@ public class Envio {
      * @return true si se ha añadido, false si el envío estaba completo
      */
     public boolean addPaquete(double alto, double ancho, double largo, double peso) {
-        // TODO
-        return false;
+        Paquete nuevoPaquete = new Paquete(alto,ancho,largo, peso);
+        return addPaquete(nuevoPaquete);
     }
-
     /**
      * @return la suma de los pesos reales de los paquetes (kg)
      */
     public double calcularPesoReal() {
-        // TODO
-        return 0;
+        double pesoRealTotal = 0;
+
+        if(paquete1 != null){
+            pesoRealTotal = pesoRealTotal + paquete1.getPeso();
+        }
+        if(paquete2 != null){
+            pesoRealTotal = pesoRealTotal + paquete2.getPeso();
+        }
+        if(paquete3 != null){
+            pesoRealTotal = pesoRealTotal + paquete3.getPeso();
+        }
+        return pesoRealTotal;
     }
 
     /**
@@ -84,8 +114,18 @@ public class Envio {
      * @return el peso facturable del envío (kg enteros)
      */
     public double calcularPesoFacturable() {
-        // TODO
-        return 0;
+        double pesoFacturableTotal = 0;
+        if(paquete1 != null){
+            pesoFacturableTotal = pesoFacturableTotal + paquete1.calcularPesoFacturable();
+        }
+        if(paquete2 != null){
+            pesoFacturableTotal = pesoFacturableTotal + paquete2.calcularPesoFacturable();
+        }
+        if(paquete3 != null){
+            pesoFacturableTotal = pesoFacturableTotal + paquete3.calcularPesoFacturable();
+        }
+        return Math.ceil(pesoFacturableTotal);
+
     }
 
     /**
